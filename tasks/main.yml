@@ -1,5 +1,3 @@
 ---
-- name: Pull image
-  docker_image:
-    name: "telefonica/prometheus-kafka-adapter:{{ prometheus_kafka_adapter_docker_version }}"
-    source: pull
+- include: install.yml
+  become: true

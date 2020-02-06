@@ -1,0 +1,15 @@
+---
+- name: Pull image
+  docker_image:
+    name: "{{ prometheus_kafka_adapter_docker_image }}"
+    source: pull
+
+- name: Copy unit file
+  template:
+    src: prometheus-kafka-adapter.service.j2
+    dest: /etc/systemd/system/prometheus-kafka-adapter.service
+    owner: root
+    group: root
+    mode: 0644
+  # notify:
+  #   - restart prometheus-kafka-adapter

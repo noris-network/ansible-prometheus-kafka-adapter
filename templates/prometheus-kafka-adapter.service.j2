@@ -1,0 +1,17 @@
+{{ ansible_managed | comment }}
+
+[Unit]
+Description=prometheus-kafka-adapter Docker Container
+After=network-online.target
+After=docker.service
+Requires=docker.service
+
+[Service]
+TimeoutStartSec=0
+ExecStartPre=-/usr/bin/docker kill {{ prometheus_kafka_adapter_docker_image }}
+ExecStartPre=-/usr/bin/docker rm {{ prometheus_kafka_adapter_docker_image }}
+ExecStartPre=/usr/bin/docker pull {{ prometheus_kafka_adapter_docker_image }}
+ExecStart=/usr/bin/docker run --name {{ prometheus_kafka_adapter_container_name }}
+
+[Install]
+WantedBy=multi-user.target

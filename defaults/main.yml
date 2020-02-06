@@ -1,2 +1,3 @@
 ---
-prometheus_kafka_adapter_docker_version: 1.4.1
+prometheus_kafka_adapter_docker_image: telefonica/prometheus-kafka-adapter:1.4.1
+prometheus_kafka_adapter_container_name: prometheus-kafka-adapter
