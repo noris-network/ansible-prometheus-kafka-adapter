@@ -1,7 +1,7 @@
 ---
 - name: restart prometheus-kafka-adapter
-  docker_container:
-    name: "{{ prometheus_kafka_adapter_container_name }}"
-    image: "{{ prometheus_kafka_adapter_docker_image }}"
-    state: started
-    restart: yes
+  become: true
+  systemd:
+    daemon_reload: true
+    name: prometheus-kafka-adapter
+    state: restarted

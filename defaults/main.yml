@@ -1,3 +1,26 @@
 ---
+# See https://github.com/Telefonica/prometheus-kafka-adapter
+
 prometheus_kafka_adapter_docker_image: telefonica/prometheus-kafka-adapter:1.4.1
 prometheus_kafka_adapter_container_name: prometheus-kafka-adapter
+prometheus_kafka_adapter_kafka_broker_list: kafka:9092
+prometheus_kafka_adapter_kafka_topic: metrics
+prometheus_kafka_adapter_kafka_compression: none
+prometheus_kafka_adapter_kafka_batch_num_messages: 10000
+prometheus_kafka_adapter_kafka_serialization_format: json
+prometheus_kafka_adapter_log_level: info
+
+# Enable basic Auth
+prometheus_kafka_adapter_basic_auth: false
+prometheus_kafka_adapter_basic_auth_username: ""
+prometheus_kafka_adapter_basic_auth_password: ""
+
+# Enable x509 client auth
+prometheus_kafka_adapter_use_tls: false
+prometheus_kafka_adapter_tls_client_cert_file: ""
+prometheus_kafka_adapter_tls_client_key_file: ""
+prometheus_kafka_adapter_tls_client_key_pass: ""
+prometheus_kafka_adapter_tls_ca_cert_file: ""
+
+# The port on the host to listen to
+prometheus_kafka_adapter_listen_port: 8080

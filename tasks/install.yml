@@ -4,12 +4,35 @@
     name: "{{ prometheus_kafka_adapter_docker_image }}"
     source: pull
 
-- name: Copy unit file
-  template:
-    src: prometheus-kafka-adapter.service.j2
-    dest: /etc/systemd/system/prometheus-kafka-adapter.service
-    owner: root
-    group: root
-    mode: 0644
-  # notify:
-  #   - restart prometheus-kafka-adapter
+- block:
+    - name: Copy systemd unit file
+      template:
+        src: prometheus-kafka-adapter.service.j2
+        dest: /etc/systemd/system/prometheus-kafka-adapter.service
+        owner: root
+        group: root
+        mode: 0644
+      notify: restart prometheus-kafka-adapter
+
+    - name: Create config dir
+      file:
+        path: /etc/systemd/system/prometheus-kafka-adapter.service.d/
+        state: directory
+        owner: root
+        group: root
+        mode: 0644
+
+    - name: Copy systemd unit environment file
+      template:
+        src: env.conf.j2
+        dest: /etc/systemd/system/prometheus-kafka-adapter.service.d/local.conf
+        owner: root
+        group: root
+        mode: 0644
+      notify: restart prometheus-kafka-adapter
+
+- name: Start and enable
+  systemd:
+    name: prometheus-kafka-adapter
+    state: started
+    enabled: yes
