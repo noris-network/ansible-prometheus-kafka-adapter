@@ -9,14 +9,9 @@ prometheus_kafka_adapter_kafka_compression: none
 prometheus_kafka_adapter_kafka_batch_num_messages: 10000
 prometheus_kafka_adapter_kafka_serialization_format: json
 prometheus_kafka_adapter_log_level: info
-
-# Enable basic Auth
-prometheus_kafka_adapter_basic_auth: false
-prometheus_kafka_adapter_basic_auth_username: ""
-prometheus_kafka_adapter_basic_auth_password: ""
+prometheus_kafka_adapter_config_dir: /etc/prometheus-kafka-adapter
 
 # Enable x509 client auth
-prometheus_kafka_adapter_use_tls: false
 prometheus_kafka_adapter_tls_client_cert_file: ""
 prometheus_kafka_adapter_tls_client_key_file: ""
 prometheus_kafka_adapter_tls_client_key_pass: ""

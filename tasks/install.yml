@@ -14,7 +14,7 @@
         mode: 0644
       notify: restart prometheus-kafka-adapter
 
-    - name: Create config dir
+    - name: Create systemd config dir
       file:
         path: /etc/systemd/system/prometheus-kafka-adapter.service.d/
         state: directory
@@ -30,6 +30,24 @@
         group: root
         mode: 0644
       notify: restart prometheus-kafka-adapter
+
+- name: Create general config dir
+  file:
+    path: "{{ prometheus_kafka_adapter_config_dir }}"
+    state: directory
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Copy client cert file
+  copy:
+    src: "{{ prometheus_kafka_adapter_tls_client_cert_file }}"
+    dst: "{{ prometheus_kafka_adapter_config_dir }}/client-cert.pem"
+    owner: root
+    group: root
+    mode: '0600'
+  when: prometheus_kafka_adapter_tls_client_cert_file != ""
+  notify: restart prometheus-kafka-adapter
 
 - name: Start and enable
   systemd:

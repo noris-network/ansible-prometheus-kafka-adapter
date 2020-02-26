@@ -11,7 +11,20 @@ TimeoutStartSec=0
 ExecStartPre=-/usr/bin/docker kill {{ prometheus_kafka_adapter_container_name }}
 ExecStartPre=-/usr/bin/docker rm {{ prometheus_kafka_adapter_container_name }}
 ExecStartPre=/usr/bin/docker pull {{ prometheus_kafka_adapter_docker_image }}
-ExecStart=/usr/bin/docker run --name {{ prometheus_kafka_adapter_container_name }} -p {{ prometheus_kafka_adapter_listen_port }}:8080 {{ prometheus_kafka_adapter_docker_image }}
+ExecStart=/usr/bin/docker run \
+    --name {{ prometheus_kafka_adapter_container_name }} \
+    -p {{ prometheus_kafka_adapter_listen_port }}:8080 \
+    -e KAFKA_BROKER_LIST=${KAFKA_BROKER_LIST} \
+    -e KAFKA_TOPIC=${KAFKA_TOPIC} \
+    -e KAFKA_BATCH_NUM_MESSAGES=${KAFKA_BATCH_NUM_MESSAGES} \
+    -e SERIALIZATION_FORMAT=${SERIALIZATION_FORMAT} \
+    -e PORT=${PORT} \
+    -e LOG_LEVEL=${LOG_LEVEL} \
+    -e KAFKA_TLS_CLIENT_CERT_FILE=${KAFKA_TLS_CLIENT_CERT_FILE} \
+    -e KAFKA_TLS_CLIENT_KEY_FILE=${KAFKA_TLS_CLIENT_KEY_FILE} \
+    -e KAFKA_TLS_CLIENT_KEY_PASS=${KAFKA_TLS_CLIENT_KEY_PASS} \
+    -e KAFKA_TLS_CA_CERT_FILE=${KAFKA_TLS_CA_CERT_FILE} \
+    {{ prometheus_kafka_adapter_docker_image }}
 
 [Install]
 WantedBy=multi-user.target
