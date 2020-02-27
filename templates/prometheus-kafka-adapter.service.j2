@@ -20,10 +20,11 @@ ExecStart=/usr/bin/docker run \
     -e SERIALIZATION_FORMAT=${SERIALIZATION_FORMAT} \
     -e PORT=${PORT} \
     -e LOG_LEVEL=${LOG_LEVEL} \
-    -e KAFKA_TLS_CLIENT_CERT_FILE=${KAFKA_TLS_CLIENT_CERT_FILE} \
-    -e KAFKA_TLS_CLIENT_KEY_FILE=${KAFKA_TLS_CLIENT_KEY_FILE} \
-    -e KAFKA_TLS_CLIENT_KEY_PASS=${KAFKA_TLS_CLIENT_KEY_PASS} \
-    -e KAFKA_TLS_CA_CERT_FILE=${KAFKA_TLS_CA_CERT_FILE} \
+    -e KAFKA_SSL_CLIENT_CERT_FILE=${KAFKA_SSL_CLIENT_CERT_FILE} \
+    -e KAFKA_SSL_CLIENT_KEY_FILE=${KAFKA_SSL_CLIENT_KEY_FILE} \
+    -e KAFKA_SSL_CLIENT_KEY_PASS=${KAFKA_SSL_CLIENT_KEY_PASS} \
+    -e KAFKA_SSL_CA_CERT_FILE=${KAFKA_SSL_CA_CERT_FILE} \
+    -e GIN_MODE=${GIN_MODE} \
     -v /etc/prometheus-kafka-adapter:/etc/prometheus-kafka-adapter:ro \
     {{ prometheus_kafka_adapter_docker_image }}
 
