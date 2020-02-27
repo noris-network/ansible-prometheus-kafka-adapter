@@ -24,6 +24,7 @@ ExecStart=/usr/bin/docker run \
     -e KAFKA_TLS_CLIENT_KEY_FILE=${KAFKA_TLS_CLIENT_KEY_FILE} \
     -e KAFKA_TLS_CLIENT_KEY_PASS=${KAFKA_TLS_CLIENT_KEY_PASS} \
     -e KAFKA_TLS_CA_CERT_FILE=${KAFKA_TLS_CA_CERT_FILE} \
+    -v /etc/prometheus-kafka-adapter:/etc/prometheus-kafka-adapter:ro \
     {{ prometheus_kafka_adapter_docker_image }}
 
 [Install]

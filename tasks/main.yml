@@ -1,3 +1,6 @@
 ---
 - include: install.yml
   become: true
+
+- include: configure.yml
+  become: true
