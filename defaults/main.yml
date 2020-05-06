@@ -1,9 +1,9 @@
 ---
 # See https://github.com/Telefonica/prometheus-kafka-adapter
 
-prometheus_kafka_adapter_docker_image: telefonica/prometheus-kafka-adapter:1.4.1
+prometheus_kafka_adapter_docker_image: telefonica/prometheus-kafka-adapter:1.6.0
 prometheus_kafka_adapter_container_name: prometheus-kafka-adapter
-prometheus_kafka_adapter_kafka_broker_list: kafka:9092
+prometheus_kafka_adapter_kafka_broker_list: kafka1:9092,kafka2:9092
 prometheus_kafka_adapter_kafka_topic: metrics
 prometheus_kafka_adapter_kafka_compression: none
 prometheus_kafka_adapter_kafka_batch_num_messages: 10000
