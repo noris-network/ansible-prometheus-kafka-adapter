@@ -1,0 +1,29 @@
+- name: Copy client cert file
+  copy:
+    src: "{{ prometheus_kafka_adapter_ssl_client_cert_file }}"
+    dest: "{{ prometheus_kafka_adapter_ssl_client_cert }}"
+    owner: root
+    group: root
+    mode: '0600'
+  when: prometheus_kafka_adapter_ssl_client_cert_file != "" and prometheus_kafka_adapter_ssl_client_copy_files == True
+  notify: restart prometheus-kafka-adapter
+
+- name: Copy client key file
+  copy:
+    src: "{{ prometheus_kafka_adapter_ssl_client_key_file }}"
+    dest: "{{ prometheus_kafka_adapter_ssl_client_key }}"
+    owner: root
+    group: root
+    mode: '0600'
+  when: prometheus_kafka_adapter_ssl_client_key_file != "" and prometheus_kafka_adapter_ssl_client_copy_files == True
+  notify: restart prometheus-kafka-adapter
+
+- name: Copy ca cert file
+  copy:
+    src: "{{ prometheus_kafka_adapter_ssl_ca_cert_file }}"
+    dest: "{{ prometheus_kafka_adapter_ssl_ca_cert }}"
+    owner: root
+    group: root
+    mode: '0600'
+  when: prometheus_kafka_adapter_ssl_ca_cert_file != "" and prometheus_kafka_adapter_ssl_client_copy_files == True
+  notify: restart prometheus-kafka-adapter

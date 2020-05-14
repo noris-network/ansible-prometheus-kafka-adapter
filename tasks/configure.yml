@@ -6,33 +6,3 @@
     owner: root
     group: root
     mode: 0644
-
-- name: Copy client cert file
-  copy:
-    src: "{{ prometheus_kafka_adapter_ssl_client_cert_file }}"
-    dest: "{{ prometheus_kafka_adapter_config_dir }}/client-cert.pem"
-    owner: root
-    group: root
-    mode: '0600'
-  when: prometheus_kafka_adapter_ssl_client_cert_file != ""
-  notify: restart prometheus-kafka-adapter
-
-- name: Copy client key file
-  copy:
-    src: "{{ prometheus_kafka_adapter_ssl_client_key_file }}"
-    dest: "{{ prometheus_kafka_adapter_config_dir }}/client-key.pem"
-    owner: root
-    group: root
-    mode: '0600'
-  when: prometheus_kafka_adapter_ssl_client_key_file != ""
-  notify: restart prometheus-kafka-adapter
-
-- name: Copy ca cert file
-  copy:
-    src: "{{ prometheus_kafka_adapter_ssl_ca_cert_file }}"
-    dest: "{{ prometheus_kafka_adapter_config_dir }}/ca-cert.pem"
-    owner: root
-    group: root
-    mode: '0600'
-  when: prometheus_kafka_adapter_ssl_ca_cert_file != ""
-  notify: restart prometheus-kafka-adapter
