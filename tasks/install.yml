@@ -1,4 +1,12 @@
 ---
+- name: Install python dependencies
+  pip:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - "requests==2.20.0"
+    - "docker==4.2.1"
+
 - name: Pull image
   docker_image:
     name: "{{ prometheus_kafka_adapter_docker_image }}"
