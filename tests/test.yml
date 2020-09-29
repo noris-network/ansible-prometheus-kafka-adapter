@@ -1,5 +1,21 @@
 ---
-- hosts: localhost
+- hosts: all
   remote_user: root
-  roles:
-    - ansible-prometheus-kafka-adapter
+
+  vars:
+    bla: blub
+
+  pre_tasks:
+    - name: install dependency galaxy role
+      delegate_to: localhost
+      become: false
+      command: ansible-galaxy install geerlingguy.docker --roles-path roles
+
+  tasks:
+    # because of pre_task and dependency role, we use include_role: and not
+    # role:
+    - name: include role to test
+      include_role:
+        name: ../../ansible-prometheus-kafka-adapter
+      vars:
+        bla: blub
