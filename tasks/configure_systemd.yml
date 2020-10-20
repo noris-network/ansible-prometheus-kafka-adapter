@@ -1,0 +1,25 @@
+---
+
+- block:
+    - name: Copy systemd unit file
+      template:
+        src: prometheus-kafka-adapter.service.j2
+        dest: "/etc/systemd/system/prometheus-kafka-adapter-{{ prometheus_kafka_adapter_container_name }}.service"
+        owner: root
+        group: root
+        mode: 0644
+      notify: restart prometheus-kafka-adapter
+
+    - name: Copy systemd unit environment file
+      template:
+        src: env.conf.j2
+        dest: "/etc/systemd/system/prometheus-kafka-adapter-{{ prometheus_kafka_adapter_container_name }}.service.d/local.conf"
+        owner: root
+        group: root
+        mode: 0644
+
+- name: Start and enable
+  systemd:
+    name: "prometheus-kafka-adapter-{{ prometheus_kafka_adapter_container_name }}"
+    state: started
+    enabled: yes
