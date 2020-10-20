@@ -17,6 +17,7 @@
         owner: root
         group: root
         mode: 0644
+      notify: restart prometheus-kafka-adapter
 
 - name: Start and enable
   systemd:
