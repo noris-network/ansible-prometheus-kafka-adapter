@@ -12,35 +12,20 @@
     name: "{{ prometheus_kafka_adapter_docker_image }}"
     source: pull
 
-- block:
-    - name: Copy systemd unit file
-      template:
-        src: prometheus-kafka-adapter.service.j2
-        dest: /etc/systemd/system/prometheus-kafka-adapter.service
-        owner: root
-        group: root
-        mode: 0644
-      notify: restart prometheus-kafka-adapter
+- name: Configure kafka container as systemd services
+  vars:
+    prometheus_kafka_adapter_container_name: "{{ config_list.name }}"
+    prometheus_kafka_adapter_listen_port: "{{ config_list.listen_port }}"
+    prometheus_kafka_adapter_log_level: "{{ config_list.log_level }}"
+    prometheus_kafka_adapter_kafka_topic: "{{ config_list.kafka_topic }}"
+    prometheus_kafka_adapter_gin_mode: "{{ config_list.gin_mode }}"
+    prometheus_kafka_adapter_kafka_broker_list: "{{ config_list.kafka_broker_list }}"
+    prometheus_kafka_adapter_ssl_ca_cert: "{{ config_list.ssl_client_ca }}"
+    prometheus_kafka_adapter_ssl_client_key: "{{ config_list.ssl_client_key }}"
+    prometheus_kafka_adapter_client_cert: "{{ config_list.ssl_client_cert }}"
 
-    - name: Create systemd config dir
-      file:
-        path: /etc/systemd/system/prometheus-kafka-adapter.service.d/
-        state: directory
-        owner: root
-        group: root
-        mode: 0644
-
-    - name: Copy systemd unit environment file
-      template:
-        src: env.conf.j2
-        dest: /etc/systemd/system/prometheus-kafka-adapter.service.d/local.conf
-        owner: root
-        group: root
-        mode: 0644
-      notify: restart prometheus-kafka-adapter
-
-- name: Start and enable
-  systemd:
-    name: prometheus-kafka-adapter
-    state: started
-    enabled: yes
+  include_tasks: configure_systemd.yml
+  loop:
+    "{{ prometheus_kafka_adapter_config_list }}"
+  loop_control:
+    loop_var: config_list
