@@ -1,7 +1,2 @@
 ---
-- name: restart prometheus-kafka-adapter
-  become: true
-  systemd:
-    daemon_reload: true
-    name: "prometheus-kafka-adapter-{{ prometheus_kafka_adapter_container_name }}"
-    state: restarted
+

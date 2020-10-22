@@ -8,7 +8,13 @@
         owner: root
         group: root
         mode: 0644
-      notify: restart prometheus-kafka-adapter
+
+    - name: restart prometheus-kafka-adapter
+      become: true
+      systemd:
+        daemon_reload: true
+        name: "prometheus-kafka-adapter-{{ prometheus_kafka_adapter_container_name }}"
+        state: restarted
 
     - name: Create systemd config dir
       file:
@@ -25,10 +31,17 @@
         owner: root
         group: root
         mode: 0644
-      notify: restart prometheus-kafka-adapter
+
+    - name: restart prometheus-kafka-adapter
+      become: true
+      systemd:
+        daemon_reload: true
+        name: "prometheus-kafka-adapter-{{ prometheus_kafka_adapter_container_name }}"
+        state: restarted
 
     - name: Start and enable
+      become: true
       systemd:
+        daemon_reload: true
         name: "prometheus-kafka-adapter-{{ prometheus_kafka_adapter_container_name }}"
-        state: started
-        enabled: yes
+        state: restarted
