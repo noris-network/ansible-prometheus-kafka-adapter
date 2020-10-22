@@ -69,17 +69,12 @@ certificates over.
         gin_mode: release
         kafka_broker_list: kafka01:9093,kafka02:9093,kafka03:9093
         kafka_topic: prometheus.metrics
-        ssl_client_copy_files: true
-        ssl_client_cert_file: files/certs/kafka/client-cert.pem
-        ssl_client_key_file: files/certs/kafka/client-key.pem
-        ssl_ca_cert_file: files/certs/kafka/ca-cert.pem
       - name: othermetrics
         listen_port: 8081
+        log_level: info
+        gin_mode: release
         kafka_broker_list: kafka01:9093,kafka02:9093,kafka03:9093
         kafka_topic: prometheus.othermetrics
-        ssl_client_ca: "{{ prometheus_kafka_adapter_config_dir }}/{{ vault.certificates.ca.name }}"
-        ssl_client_cert: "{{ prometheus_kafka_adapter_config_dir }}/{{ vault.certificates.cert.name }}"
-        ssl_client_key: "{{ prometheus_kafka_adapter_config_dir }}/{{ vault.certificates.key.name }}"
   roles:
       - noris-network.prometheus-kafka-adapter
 ```
