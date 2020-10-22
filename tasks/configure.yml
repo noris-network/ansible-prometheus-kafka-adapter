@@ -6,11 +6,3 @@
     owner: root
     group: root
     mode: 0644
-
-- name: Create systemd config dir
-  file:
-    path: /etc/systemd/system/prometheus-kafka-adapter.service.d/
-    state: directory
-    owner: root
-    group: root
-    mode: 0644

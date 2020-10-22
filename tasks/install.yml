@@ -20,9 +20,6 @@
     prometheus_kafka_adapter_kafka_topic: "{{ config_list.kafka_topic }}"
     prometheus_kafka_adapter_gin_mode: "{{ config_list.gin_mode }}"
     prometheus_kafka_adapter_kafka_broker_list: "{{ config_list.kafka_broker_list }}"
-    prometheus_kafka_adapter_ssl_ca_cert: "{{ config_list.ssl_client_ca }}"
-    prometheus_kafka_adapter_ssl_client_key: "{{ config_list.ssl_client_key }}"
-    prometheus_kafka_adapter_client_cert: "{{ config_list.ssl_client_cert }}"
 
   include_tasks: configure_systemd.yml
   loop:
