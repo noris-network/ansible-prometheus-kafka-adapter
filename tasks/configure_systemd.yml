@@ -10,6 +10,14 @@
         mode: 0644
       notify: restart prometheus-kafka-adapter
 
+    - name: Create systemd config dir
+      file:
+        path: "/etc/systemd/system/prometheus-kafka-adapter-{{ prometheus_kafka_adapter_container_name }}.service.d/"
+        state: directory
+        owner: root
+        group: root
+        mode: 0644
+
     - name: Copy systemd unit environment file
       template:
         src: env.conf.j2
@@ -19,8 +27,8 @@
         mode: 0644
       notify: restart prometheus-kafka-adapter
 
-- name: Start and enable
-  systemd:
-    name: "prometheus-kafka-adapter-{{ prometheus_kafka_adapter_container_name }}"
-    state: started
-    enabled: yes
+    - name: Start and enable
+      systemd:
+        name: "prometheus-kafka-adapter-{{ prometheus_kafka_adapter_container_name }}"
+        state: started
+        enabled: yes
