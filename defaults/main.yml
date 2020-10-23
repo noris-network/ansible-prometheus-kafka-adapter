@@ -7,6 +7,8 @@ prometheus_kafka_adapter_config_dir: /etc/prometheus-kafka-adapter
 prometheus_kafka_adapter_kafka_compression: none
 prometheus_kafka_adapter_kafka_batch_num_messages: 10000
 prometheus_kafka_adapter_kafka_serialization_format: json
+prometheus_kafka_adapter_log_level: info
+prometheus_kafka_adapter_gin_mode: release
 
 # Specify if certificates should be copied to the target
 prometheus_kafka_adapter_ssl_client_copy_files: false
@@ -17,7 +19,7 @@ prometheus_kafka_adapter_ssl_ca_cert_file: ""
 # Enable x509 client auth configuration
 prometheus_kafka_adapter_ssl_client_key_pass: ""
 
-# The port on the host to listen to
+# The default port on the host to listen to
 prometheus_kafka_adapter_listen_port: 8080
 
 prometheus_kafka_adapter_config_list: []
