@@ -48,6 +48,25 @@ Name|Default Value|Description
 `kafka_broker_list`|kafka1:9092,kafka2:9092|A list of Kafka brokers to send the data to.
 `kafka_topic`|metrics|The Kafka topic to send the data to.
 
+## Remote write
+
+When setting an url for `prometheus_remote_write` you can access an adapter's
+listen port through its position in `prometheus_kafka_adapter_config_list`.
+
+```yaml
+prometheus_remote_write:
+  - url: "http://{{ ansible_fqdn }}:{{ prometheus_kafka_adapter_config_list.0.listen_port }}/receive"
+    write_relabel_configs:
+      - source_labels: [__name__]
+        regex: (?i)(.*some:metric:.+)
+        action: keep
+  - url: "http://{{ ansible_fqdn }}:{{ prometheus_kafka_adapter_config_list.1.listen_port }}/receive"
+    write_relabel_configs:
+      - source_labels: [__name__]
+        regex: (?i)(.*some:metric:.+)
+        action: keep
+```
+
 ## Deploy 
 
 This playbook will use client certificate authentication and copy the necessary
