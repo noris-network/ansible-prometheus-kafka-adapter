@@ -2,9 +2,6 @@
 - hosts: all
   remote_user: root
 
-  vars:
-    bla: blub
-
   pre_tasks:
     - name: install dependency galaxy role
       delegate_to: localhost
@@ -51,4 +48,20 @@
       include_role:
         name: ../../ansible-prometheus-kafka-adapter
       vars:
-        bla: blub
+        prometheus_kafka_adapter_ssl_client_copy_files: false
+        prometheus_kafka_adapter_ssl_client_cert: "{{ prometheus_kafka_adapter_config_dir }}/mycert.crt.pem"
+        prometheus_kafka_adapter_ssl_client_key: "{{ prometheus_kafka_adapter_config_dir }}/mykey.key.pem"
+        prometheus_kafka_adapter_ssl_ca_cert: "{{ prometheus_kafka_adapter_config_dir }}/myca.crt.pem"
+        prometheus_kafka_adapter_config_list:
+          - name: metrics
+            listen_port: 8080
+            log_level: info
+            gin_mode: release
+            kafka_broker_list: kafka01:9093,kafka02:9093,kafka03:9093
+            kafka_topic: prometheus.metrics
+          - name: othermetrics
+            listen_port: 8081
+            log_level: info
+            gin_mode: release
+            kafka_broker_list: kafka01:9093,kafka02:9093,kafka03:9093
+            kafka_topic: prometheus.othermetrics
