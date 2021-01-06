@@ -7,6 +7,8 @@ docker container. The container will be managed by systemd on the target host.
 
 - Ansible >= 2.7 (It might work on previous versions, but we cannot guarantee
   it)
+- Tested on vagrant for Centos 7+8, Ubuntu 18.04 + 20.04
+- Currently not working on vagrant for RHEL 7+8 and Debian 9+10
 
 ## Intro
 
@@ -30,9 +32,9 @@ prometheus_kafka_adapter_config_list:
     kafka_topic: prometheus.metrics
   - name: othermetrics
     listen_port: 8081
-    log_level: info
-    gin_mode: release
-    kafka_broker_list: kafka01:9093,kafka02:9093,kafka03:9093
+    log_level: debug
+    gin_mode: debug
+    kafka_broker_list: kafka04:9093,kafka05:9093,kafka06:9093
     kafka_topic: prometheus.othermetrics
 ```
 
@@ -67,12 +69,10 @@ prometheus_remote_write:
         action: keep
 ```
 
-## Deploy 
+## Deploy
 
 This playbook will use client certificate authentication and copy the necessary
 certificates over.
-
-This playbook will use certificates inlined in a file encrypted by Ansible Vault but don't use the copy functionality provided by the role.
 
 ```yaml
 - name: Enable client auth
@@ -115,7 +115,12 @@ This playbook will use certificates inlined in a file encrypted by Ansible Vault
       owner: root
       group: root
       mode: '0600'
+```
 
+This playbook will use certificates inlined in a file encrypted by Ansible Vault
+but don't use the copy functionality provided by the role.
+
+```yaml
 - name: Install prometheus-kafka-adapter
   become: true
   hosts: servers
@@ -148,7 +153,7 @@ Name|Default Value|Description
 `prometheus_kafka_adapter_kafka_serialization_format`|json|Defines the serialization format (`json` or `avro-json`)
 `prometheus_kafka_adapter_listen_port`|8080|The HTTP port to listen on.
 `prometheus_kafka_adapter_log_level`|info|The log level of prometheus-kafka-adapter.
-`prometheus_kafka_adapter_gin_mode`|release|The [gin][gin] log level.
+`prometheus_kafka_adapter_gin_mode`|release|The [gin](https://github.com/gin-gonic/gin) log level.
 
 > TODO: decide if we copy files or take content from vault for SSL certs
 

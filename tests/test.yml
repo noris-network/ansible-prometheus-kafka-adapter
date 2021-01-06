@@ -61,7 +61,7 @@
             kafka_topic: prometheus.metrics
           - name: othermetrics
             listen_port: 8081
-            log_level: info
-            gin_mode: release
-            kafka_broker_list: kafka01:9093,kafka02:9093,kafka03:9093
+            log_level: debug
+            gin_mode: debug
+            kafka_broker_list: kafka04:9093,kafka05:9093,kafka06:9093
             kafka_topic: prometheus.othermetrics
