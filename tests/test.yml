@@ -2,14 +2,44 @@
 - hosts: all
   remote_user: root
 
-  vars:
-    bla: blub
-
   pre_tasks:
     - name: install dependency galaxy role
       delegate_to: localhost
       become: false
       command: ansible-galaxy install geerlingguy.docker --roles-path roles
+
+    - name: Vagrant | Install python dependencies (CentOS7)
+      yum:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - epel-release
+        - python-setuptools
+        - python-pip
+      when:
+        - ansible_os_family|lower == 'redhat'
+        - ansible_distribution_version|int <= 7
+
+    - name: Vagrant | Install python dependencies (CentOS8)
+      yum:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - epel-release
+        - python3-pip
+      when:
+        - ansible_os_family|lower == 'redhat'
+        - ansible_distribution_version|int >= 8
+
+    - name: Vagrant | Install python dependencies (Debian/Ubuntu)
+      apt:
+        name: "{{ item }}"
+        state: present
+        cache_valid_time: 3600
+      loop:
+        - python3-pip
+      when:
+        - ansible_os_family|lower == 'debian'
 
   tasks:
     # because of pre_task and dependency role, we use include_role: and not
@@ -18,4 +48,20 @@
       include_role:
         name: ../../ansible-prometheus-kafka-adapter
       vars:
-        bla: blub
+        prometheus_kafka_adapter_ssl_client_copy_files: false
+        prometheus_kafka_adapter_ssl_client_cert: "{{ prometheus_kafka_adapter_config_dir }}/mycert.crt.pem"
+        prometheus_kafka_adapter_ssl_client_key: "{{ prometheus_kafka_adapter_config_dir }}/mykey.key.pem"
+        prometheus_kafka_adapter_ssl_ca_cert: "{{ prometheus_kafka_adapter_config_dir }}/myca.crt.pem"
+        prometheus_kafka_adapter_config_list:
+          - name: metrics
+            listen_port: 8080
+            log_level: info
+            gin_mode: release
+            kafka_broker_list: kafka01:9093,kafka02:9093,kafka03:9093
+            kafka_topic: prometheus.metrics
+          - name: othermetrics
+            listen_port: 8081
+            log_level: debug
+            gin_mode: debug
+            kafka_broker_list: kafka04:9093,kafka05:9093,kafka06:9093
+            kafka_topic: prometheus.othermetrics

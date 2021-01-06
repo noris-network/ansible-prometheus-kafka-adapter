@@ -64,5 +64,10 @@ Vagrant.configure("2") do |config|
         ansible.become = true
         ansible.verbose = "v"
         ansible.playbook = "test.yml"
+        #ansible.groups = {
+        #}
+        ansible.host_vars = {
+          "centos7" => {"ansible_python_interpreter" => "/usr/bin/python2"}
+        }
     end
 end
