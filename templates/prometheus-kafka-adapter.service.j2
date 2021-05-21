@@ -13,7 +13,7 @@ ExecStartPre=-/usr/bin/docker rm {{ prometheus_kafka_adapter_container_name }}
 ExecStartPre=/usr/bin/docker pull {{ prometheus_kafka_adapter_docker_image }}
 ExecStart=/usr/bin/docker run \
     --name {{ prometheus_kafka_adapter_container_name }} \
-    -p {{ prometheus_kafka_adapter_listen_port }}:{{ prometheus_kafka_adapter_listen_port }} \
+    -p {{ prometheus_kafka_adapter_listen_port }}:{{ _listen_port_docker }} \
     -e KAFKA_BROKER_LIST=${KAFKA_BROKER_LIST} \
     -e KAFKA_TOPIC=${KAFKA_TOPIC} \
     -e KAFKA_BATCH_NUM_MESSAGES=${KAFKA_BATCH_NUM_MESSAGES} \

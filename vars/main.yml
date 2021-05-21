@@ -1,2 +1,3 @@
 ---
 # vars file for ansible-prometheus-kafka-adapter
+_listen_port_docker: 8080
