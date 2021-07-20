@@ -2,6 +2,11 @@
 - hosts: all
   remote_user: root
 
+  vars:
+    # prometheus_kafka_adapter_docker_registry: ''
+    # ejbca_gemalto_docker_username: ''
+    # ejbca_gemalto_docker_password: ''
+
   pre_tasks:
     - name: install dependency galaxy role
       delegate_to: localhost

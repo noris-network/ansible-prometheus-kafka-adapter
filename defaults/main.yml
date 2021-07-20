@@ -10,6 +10,11 @@ prometheus_kafka_adapter_kafka_serialization_format: json
 prometheus_kafka_adapter_log_level: info
 prometheus_kafka_adapter_gin_mode: release
 
+# Placeholders for custom docker registry
+prometheus_kafka_adapter_docker_registry: 'registry.hub.docker.com'
+prometheus_kafka_adapter_docker_username: ''
+prometheus_kafka_adapter_docker_password: ''
+
 # Specify if certificates should be copied to the target
 prometheus_kafka_adapter_ssl_client_copy_files: false
 prometheus_kafka_adapter_ssl_client_cert_file: ""
