@@ -7,12 +7,11 @@ target host.
 
 The role is tested with vagrant:
 
-- Centos 7
 - Centos 8
 - Ubuntu 18.04
 - Ubuntu 20.04
 
-Currently not working on vagrant for RHEL 7+8 and Debian 9+10
+Currently not working on vagrant for Centos 7, RHEL 7+8 and Debian 9+10
 
 ## Requirements
 
