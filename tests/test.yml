@@ -13,18 +13,6 @@
       become: false
       command: ansible-galaxy install geerlingguy.docker --roles-path roles
 
-    - name: Vagrant | Install python dependencies (CentOS7)
-      yum:
-        name: "{{ item }}"
-        state: present
-      loop:
-        - epel-release
-        - python-setuptools
-        - python-pip
-      when:
-        - ansible_os_family|lower == 'redhat'
-        - ansible_distribution_version|int <= 7
-
     - name: Vagrant | Install python dependencies (CentOS8)
       yum:
         name: "{{ item }}"
