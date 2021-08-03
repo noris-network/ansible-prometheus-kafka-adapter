@@ -7,12 +7,11 @@ target host.
 
 The role is tested with vagrant:
 
-- Centos 7
 - Centos 8
 - Ubuntu 18.04
 - Ubuntu 20.04
 
-Currently not working on vagrant for RHEL 7+8 and Debian 9+10
+Currently not working on vagrant for Centos 7, RHEL 7+8 and Debian 9+10
 
 ## Requirements
 
@@ -29,6 +28,9 @@ repo](https://github.com/Telefonica/prometheus-kafka-adapter).
 Name|Default Value|Description
 ---|---|---
 `prometheus_kafka_adapter_config_dir`|/etc/prometheus-kafka-adapter|The config dir on the target host.
+`prometheus_kafka_adapter_docker_registry`|none|custom docker registry, no http/https or tailing slash, defaults to `registry.hub.docker.com`
+`prometheus_kafka_adapter_docker_username`|none|registry login username
+`prometheus_kafka_adapter_docker_password`|none|registry user password
 `prometheus_kafka_adapter_docker_image`|telefonica/prometheus-kafka-adapter:1.6.0|The Docker image to use for the adapter.
 `prometheus_kafka_adapter_container_name`|prometheus-kafka-adapter|The name of the container to be run on the target host.
 `prometheus_kafka_adapter_config_list`|[]|A list of prometheus-kafka-instances, for example one PKA per kafka topic.

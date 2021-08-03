@@ -7,9 +7,18 @@
     - "requests==2.20.0"
     - "docker==4.2.1"
 
+- name: prometheus_kafka_adapter | log into docker registry
+  docker_login:
+    registry: "{{ prometheus_kafka_adapter_docker_registry }}"
+    username: "{{ prometheus_kafka_adapter_docker_username }}"
+    password: "{{ prometheus_kafka_adapter_docker_password }}"
+  when:
+    - prometheus_kafka_adapter_docker_username != ''
+    - prometheus_kafka_adapter_docker_password != ''
+
 - name: Pull image
   docker_image:
-    name: "{{ prometheus_kafka_adapter_docker_image }}"
+    name: "{{prometheus_kafka_adapter_docker_registry}}/{{ prometheus_kafka_adapter_docker_image }}"
     source: pull
 
 - name: Configure kafka container as systemd services
