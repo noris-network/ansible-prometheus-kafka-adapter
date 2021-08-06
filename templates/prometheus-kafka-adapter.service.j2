@@ -10,7 +10,7 @@ Requires=docker.service
 TimeoutStartSec=0
 ExecStartPre=-/usr/bin/docker kill {{ prometheus_kafka_adapter_container_name }}
 ExecStartPre=-/usr/bin/docker rm {{ prometheus_kafka_adapter_container_name }}
-ExecStartPre=/usr/bin/docker pull {{ prometheus_kafka_adapter_docker_image }}
+ExecStartPre=/usr/bin/docker pull {{prometheus_kafka_adapter_docker_registry}}/{{ prometheus_kafka_adapter_docker_image }}
 ExecStart=/usr/bin/docker run \
     --name {{ prometheus_kafka_adapter_container_name }} \
     -p {{ prometheus_kafka_adapter_listen_port }}:{{ _listen_port_docker }} \
@@ -26,7 +26,7 @@ ExecStart=/usr/bin/docker run \
     -e KAFKA_SSL_CA_CERT_FILE=${KAFKA_SSL_CA_CERT_FILE} \
     -e GIN_MODE=${GIN_MODE} \
     -v /etc/prometheus-kafka-adapter:/etc/prometheus-kafka-adapter:ro \
-    {{ prometheus_kafka_adapter_docker_image }}
+    {{prometheus_kafka_adapter_docker_registry}}/{{ prometheus_kafka_adapter_docker_image }}
 
 [Install]
 WantedBy=multi-user.target
