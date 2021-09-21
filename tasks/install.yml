@@ -8,14 +8,14 @@
       loop:
         - "requests==2.20.0"
         - "docker==4.2.1"
-      when: prometheus_kafka_adapter_manage_yum_packages | default(true)
+      when: prometheus_kafka_adapter_manage_pip_packages
     - name: Install python dependencies via yum
       yum:
         name:
           - python3-docker
           - python3-requests
         state: present
-      when: prometheus_kafka_adapter_manage_yum_packages | default(false)
+      when: prometheus_kafka_adapter_manage_yum_packages
 
 - name: prometheus_kafka_adapter | log into docker registry
   docker_login:
