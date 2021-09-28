@@ -3,12 +3,12 @@
   block:
     - name: Install python dependencies via pip
       pip:
-        name: "{{ item }}"
+        name:
+          - "requests==2.20.0"
+          - "docker==4.2.1"
         state: present
-      loop:
-        - "requests==2.20.0"
-        - "docker==4.2.1"
       when: prometheus_kafka_adapter_manage_pip_packages
+      
     - name: Install python dependencies via yum
       yum:
         name:
