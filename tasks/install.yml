@@ -1,11 +1,21 @@
 ---
-- name: Install python dependencies
-  pip:
-    name: "{{ item }}"
-    state: present
-  loop:
-    - "requests==2.20.0"
-    - "docker==4.2.1"
+- name: Install dependencies
+  block:
+    - name: Install dependencies via pip
+      pip:
+        name:
+          - "requests==2.20.0"
+          - "docker==4.2.1"
+        state: present
+      when: prometheus_kafka_adapter_dependencies_method == 'pip'
+      
+    - name: Install dependencies via yum
+      yum:
+        name:
+          - python3-docker
+          - python3-requests
+        state: present
+      when: prometheus_kafka_adapter_dependencies_method == 'yum'
 
 - name: prometheus_kafka_adapter | log into docker registry
   docker_login:

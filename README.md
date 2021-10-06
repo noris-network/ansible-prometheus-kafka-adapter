@@ -40,6 +40,7 @@ Name|Default Value|Description
 `prometheus_kafka_adapter_listen_port`|8080|The HTTP port to listen on.
 `prometheus_kafka_adapter_log_level`|info|The log level of prometheus-kafka-adapter.
 `prometheus_kafka_adapter_gin_mode`|release|The [gin](https://github.com/gin-gonic/gin) log level.
+`prometheus_kafka_adapter_dependencies_method`|pip|Choose how to install dependencies. Values can be `pip`, `yum`
 
 > TODO: decide if we copy files or take content from vault for SSL certs
 
