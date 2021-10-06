@@ -29,6 +29,5 @@ prometheus_kafka_adapter_listen_port: 8080
 
 prometheus_kafka_adapter_config_list: []
 
-# choose between yum or pip package installation
-prometheus_kafka_adapter_manage_pip_packages: true
-prometheus_kafka_adapter_manage_yum_packages: false
+# choose installation method for dependencies
+prometheus_kafka_adapter_dependencies_method: pip
