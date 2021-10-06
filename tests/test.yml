@@ -41,6 +41,7 @@
       include_role:
         name: ../../ansible-prometheus-kafka-adapter
       vars:
+        prometheus_kafka_adapter_dependency_pip: false
         prometheus_kafka_adapter_ssl_client_copy_files: false
         prometheus_kafka_adapter_ssl_client_cert: "{{ prometheus_kafka_adapter_config_dir }}/mycert.crt.pem"
         prometheus_kafka_adapter_ssl_client_key: "{{ prometheus_kafka_adapter_config_dir }}/mykey.key.pem"

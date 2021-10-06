@@ -30,4 +30,4 @@ prometheus_kafka_adapter_listen_port: 8080
 prometheus_kafka_adapter_config_list: []
 
 # choose installation method for dependencies
-prometheus_kafka_adapter_dependencies_method: pip
+prometheus_kafka_adapter_dependency_pip: true

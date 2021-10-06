@@ -1,21 +1,19 @@
 ---
-- name: Install dependencies
-  block:
-    - name: Install dependencies via pip
-      pip:
-        name:
-          - "requests==2.20.0"
-          - "docker==4.2.1"
-        state: present
-      when: prometheus_kafka_adapter_dependencies_method == 'pip'
-      
-    - name: Install dependencies via yum
-      yum:
-        name:
-          - python3-docker
-          - python3-requests
-        state: present
-      when: prometheus_kafka_adapter_dependencies_method == 'yum'
+- name: Install dependencies (pip)
+  pip:
+    name:
+      - "requests==2.20.0"
+      - "docker==4.2.1"
+    state: present
+  when: prometheus_kafka_adapter_dependency_pip
+
+- name: Install dependencies (package)
+  package:
+    name:
+      - python3-docker
+      - python3-requests
+    state: present
+  when: not prometheus_kafka_adapter_dependency_pip
 
 - name: prometheus_kafka_adapter | log into docker registry
   docker_login:
