@@ -41,6 +41,7 @@ Name|Default Value|Description
 `prometheus_kafka_adapter_log_level`|info|The log level of prometheus-kafka-adapter.
 `prometheus_kafka_adapter_gin_mode`|release|The [gin](https://github.com/gin-gonic/gin) log level.
 `prometheus_kafka_adapter_dependency_pip`|true|If `true` pip is used, if `false` OS package manger
+`prometheus_kafka_adapter_docker_network`|none|attach to custom docker network
 
 > TODO: decide if we copy files or take content from vault for SSL certs
 

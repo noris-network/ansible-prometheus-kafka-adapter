@@ -15,6 +15,9 @@ prometheus_kafka_adapter_docker_registry: 'registry.hub.docker.com'
 prometheus_kafka_adapter_docker_username: ''
 prometheus_kafka_adapter_docker_password: ''
 
+# Placeholder for custom docker network
+prometheus_kafka_adapter_docker_network: ''
+
 # Specify if certificates should be copied to the target
 prometheus_kafka_adapter_ssl_client_copy_files: false
 prometheus_kafka_adapter_ssl_client_cert_file: ""
