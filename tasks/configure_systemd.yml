@@ -28,12 +28,18 @@
         mode: 0644
       register: systemd_unit_env
 
+    - name: Start and enable
+      become: true
+      systemd:
+        name: "prometheus-kafka-adapter-{{ prometheus_kafka_adapter_container_name }}"
+        state: started
+        enabled: yes
+
     - name: restart prometheus-kafka-adapter
       become: true
       systemd:
         daemon_reload: true
         name: "prometheus-kafka-adapter-{{ prometheus_kafka_adapter_container_name }}"
         state: restarted
-        enabled: yes
       when: systemd_unit.changed or config_dir.changed or systemd_unit_env.changed
 
