@@ -34,6 +34,7 @@
         name: "prometheus-kafka-adapter-{{ prometheus_kafka_adapter_container_name }}"
         state: started
         enabled: yes
+      ignore_errors: '{{ ansible_check_mode }}'
 
     - name: restart prometheus-kafka-adapter
       become: true
@@ -41,5 +42,6 @@
         daemon_reload: true
         name: "prometheus-kafka-adapter-{{ prometheus_kafka_adapter_container_name }}"
         state: restarted
+      ignore_errors: '{{ ansible_check_mode }}'
       when: systemd_unit.changed or config_dir.changed or systemd_unit_env.changed
 
