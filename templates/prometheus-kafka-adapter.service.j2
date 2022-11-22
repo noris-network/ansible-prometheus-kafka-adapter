@@ -16,7 +16,9 @@ ExecStart=/usr/bin/docker run \
 {% if prometheus_kafka_adapter_docker_network != "" %}
     --network {{ prometheus_kafka_adapter_docker_network }} \
 {% endif %}
+{% if prometheus_kafka_adapter_listen_port != "" %}
     -p {{ prometheus_kafka_adapter_listen_port }}:{{ _listen_port_docker }} \
+{% endif %}
     -e KAFKA_BROKER_LIST=${KAFKA_BROKER_LIST} \
     -e KAFKA_TOPIC=${KAFKA_TOPIC} \
     -e KAFKA_COMPRESSION=${KAFKA_COMPRESSION} \

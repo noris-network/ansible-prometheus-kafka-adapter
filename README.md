@@ -37,7 +37,7 @@ Name|Default Value|Description
 `prometheus_kafka_adapter_kafka_compression`|none|The compression type to be used.
 `prometheus_kafka_adapter_kafka_batch_num_messages`|10000|The number of batches to write.
 `prometheus_kafka_adapter_kafka_serialization_format`|json|Defines the serialization format (`json` or `avro-json`)
-`prometheus_kafka_adapter_listen_port`|8080|The HTTP port to listen on.
+`prometheus_kafka_adapter_listen_port`|none|Optional, the docker exposed HTTP port to host, e.g. 8080
 `prometheus_kafka_adapter_log_level`|info|The log level of prometheus-kafka-adapter.
 `prometheus_kafka_adapter_gin_mode`|release|The [gin](https://github.com/gin-gonic/gin) log level.
 `prometheus_kafka_adapter_dependency_pip`|true|If `true` pip is used, if `false` OS package manger
@@ -56,7 +56,6 @@ The following variable defines two adapters:
 ```yaml
 prometheus_kafka_adapter_config_list:
   - name: metrics
-    listen_port: 8080
     log_level: info
     gin_mode: release
     kafka_broker_list: kafka01:9093,kafka02:9093,kafka03:9093
