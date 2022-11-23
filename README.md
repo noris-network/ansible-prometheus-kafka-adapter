@@ -10,13 +10,14 @@ The role is tested with vagrant:
 - Centos 8
 - Ubuntu 18.04
 - Ubuntu 20.04
+- Debian 9
+- Debian 10
 
-Currently not working on vagrant for Centos 7, RHEL 7+8 and Debian 9+10
+Currently not working on vagrant for Centos 7, RHEL 7+8
 
 ## Requirements
 
-Ansible >= 2.7 (It might work on previous versions, but we cannot guarantee
-  it)
+Ansible >= 2.9
 
 ## Role Variables
 
