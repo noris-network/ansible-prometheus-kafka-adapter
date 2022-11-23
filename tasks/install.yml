@@ -32,7 +32,7 @@
 - name: Configure kafka container as systemd services
   vars:
     prometheus_kafka_adapter_container_name: "{{ config_list.name }}"
-    prometheus_kafka_adapter_listen_port: "{{ config_list.listen_port }}"
+    prometheus_kafka_adapter_listen_port: "{{ config_list.listen_port | default()}}"
     prometheus_kafka_adapter_log_level: "{{ config_list.log_level }}"
     prometheus_kafka_adapter_kafka_topic: "{{ config_list.kafka_topic }}"
     prometheus_kafka_adapter_gin_mode: "{{ config_list.gin_mode }}"
