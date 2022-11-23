@@ -1,8 +1,0 @@
----
-- name: Create general config dir
-  file:
-    path: "{{ prometheus_kafka_adapter_config_dir }}"
-    state: directory
-    owner: root
-    group: root
-    mode: 0644
