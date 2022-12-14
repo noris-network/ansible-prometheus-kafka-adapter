@@ -1,9 +1,8 @@
 ---
 - name: Restart prometheus-kafka-adapter
-  become: true
   systemd:
     daemon_reload: true
-    name: "prometheus-kafka-adapter-{{ prometheus_kafka_adapter_container_name }}"
+    name: prometheus-kafka-adapter-{{ ansible_custom_fact_prometheus_kafka_adapter_container_name }}
     state: restarted
   ignore_errors: '{{ ansible_check_mode }}'
 

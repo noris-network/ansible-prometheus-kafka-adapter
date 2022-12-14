@@ -29,10 +29,15 @@
       notify:
         - Restart prometheus-kafka-adapter
 
-    - name: Start and enable
-      become: true
-      systemd:
-        name: "prometheus-kafka-adapter-{{ prometheus_kafka_adapter_container_name }}"
-        state: started
-        enabled: yes
-      ignore_errors: '{{ ansible_check_mode }}'
+    # Ansible handlers have a global scope so variables from our loop don't carry over.
+    # To circumvent this we set the container name to a global fact here, which is then available to the handler.
+    # This is pretty hacky so we should probably rework this whole part.
+    #
+    # Unfortunately variable interpolation doesn't wok in task names here. Therefor we can't easily output which container is currently being restarted.
+    # As a workaround it would be possible to add a debug message here but it's not strictly necessary in my opinion.
+    - name: Persist container name in ansible fact
+      ansible.builtin.set_fact:
+        ansible_custom_fact_prometheus_kafka_adapter_container_name: '{{ prometheus_kafka_adapter_container_name }}'
+
+    - name: Flush handlers
+      ansible.builtin.meta: flush_handlers
