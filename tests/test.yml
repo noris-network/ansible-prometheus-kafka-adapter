@@ -8,11 +8,6 @@
     # ejbca_gemalto_docker_password: ''
 
   pre_tasks:
-    - name: install dependency galaxy role
-      delegate_to: localhost
-      become: false
-      command: ansible-galaxy install geerlingguy.docker --roles-path roles
-
     - name: Vagrant | Install python dependencies (CentOS8)
       yum:
         name: "{{ item }}"
