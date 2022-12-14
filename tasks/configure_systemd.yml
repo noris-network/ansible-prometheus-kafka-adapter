@@ -33,7 +33,7 @@
     # To circumvent this we set the container name to a global fact here, which is then available to the handler.
     # This is pretty hacky so we should probably rework this whole part.
     #
-    # Unfortunately variable interpolation doesn't wok in task names here. Therefor we can't easily output which container is currently being restarted.
+    # Unfortunately variable interpolation doesn't work in task names here. Therefor we can't easily output which container is currently being restarted.
     # As a workaround it would be possible to add a debug message here but it's not strictly necessary in my opinion.
     - name: Persist container name in ansible fact
       ansible.builtin.set_fact:
