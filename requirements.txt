@@ -1,0 +1,2 @@
+# https://github.com/ansible/ansible/issues/77413#issuecomment-1083231487
+ansible-core==2.11.1
