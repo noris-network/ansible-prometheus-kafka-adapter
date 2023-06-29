@@ -31,7 +31,7 @@ ExecStart=/usr/bin/docker run \
     -e KAFKA_SSL_CLIENT_KEY_PASS=${KAFKA_SSL_CLIENT_KEY_PASS} \
     -e KAFKA_SSL_CA_CERT_FILE=${KAFKA_SSL_CA_CERT_FILE} \
     -e GIN_MODE=${GIN_MODE} \
-    -v /etc/prometheus-kafka-adapter:/etc/prometheus-kafka-adapter:ro \
+    -v {{prometheus_kafka_adapter_config_dir}}:/etc/prometheus-kafka-adapter:ro \
     {{prometheus_kafka_adapter_docker_registry}}/{{ prometheus_kafka_adapter_docker_image }}
 
 [Install]
